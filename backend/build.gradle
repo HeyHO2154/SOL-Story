@@ -1,0 +1,73 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.2'
+	id 'io.spring.dependency-management' version '1.1.6'
+}
+
+group = 'com.eyes'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// 스프링 캐시 추상화를 사용하여 애플리케이션에서 캐싱을 쉽게 구성하고 관리할 수 있도록 지원
+	implementation 'org.springframework.boot:spring-boot-starter-cache'
+	// JPA 사용 - 데이터베이스와 객체 간의 매핑을 자동으로 관리 (ORM)
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	// Spring Data REST를 사용해 Spring Data 리포지토리로부터 RESTful 웹 서비스를 자동으로 생성
+	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+	// MyBatis가 JDBC API를 통해 데이터베이스와 연동되므로, MyBatis 사용을 위해 JDBC를 추가
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'com.oracle.database.jdbc:ojdbc8:19.8.0.0'
+    implementation 'org.hibernate:hibernate-core:6.5.2.Final'
+	
+	// 애플리케이션에서 이메일을 쉽게 전송할 수 있도록 지원 (SMTP 설정, 메일 전송 기능 포함)
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+	// 사용자 입력 데이터의 유효성을 검사하여 잘못된 데이터를 방지하는 기능 제공
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	// RESTful API 및 웹 애플리케이션을 구축하기 위한 필수적인 기능 제공 (Spring MVC 포함)
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	//webclient 사용
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	// 컴파일 시 롬복 사용할 수 있도록 (@Getter, @Setter, @Builder 등)
+	compileOnly 'org.projectlombok:lombok:1.18.34'  
+	// Oracle 데이터베이스에 연결하기 위해 필요한 JDBC 드라이버 제공 
+	runtimeOnly 'com.oracle.database.jdbc:ojdbc11'
+
+	implementation 'io.netty:netty-resolver-dns-native-macos:4.1.68.Final:osx-aarch_64'
+
+	// 롬복 어노테이션 처리기
+	annotationProcessor 'org.projectlombok:lombok:1.18.34'
+	
+	// gabin Hibernate 의존성 설정
+	implementation 'org.hibernate.orm:hibernate-core:6.5.2.Final'
+	implementation 'org.hibernate:hibernate-core:6.5.2.Final'
+	
+	implementation 'com.oracle.database.jdbc:ojdbc8:19.8.0.0'
+	
+	
+	// Spring 애플리케이션의 통합 테스트 지원
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	// MyBatis와 관련된 기능을 테스트할 수 있는 도구 및 유틸리티 제공
+	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3'
+	// Spring Shell 명령어 기반의 애플리케이션을 테스트할 수 있는 유틸리티 제공
+	// testImplementation 'org.springframework.shell:spring-shell-starter-test'
+	// JUnit 플랫폼 런처를 통해 테스트 실행 및 리포팅 기능 제공
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+}
+
+tasks.named('test') {
+	// JUnit 5 플랫폼을 사용하여 테스트를 실행하도록 설정
+	useJUnitPlatform()
+}

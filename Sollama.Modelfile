@@ -1,0 +1,17 @@
+FROM Sollama.gguf     
+
+TEMPLATE """{{- if .System }}
+<s>{{ .System }}</s>
+{{- end }}
+<s>Human:
+{{ .Prompt }}</s>
+<s>Assistant:
+"""
+
+SYSTEM """너는 30년 경력의 훌륭한 소설가야. 모든 대답은 한국어(Korean)으로 대답해줘."""
+
+PARAMETER temperature 0
+PARAMETER num_predict 3000
+PARAMETER num_ctx 4096
+PARAMETER stop <s>
+PARAMETER stop </s>
